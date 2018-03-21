@@ -152,6 +152,7 @@ public class Observer implements IObserver {
             change(new String[]{});
         } else {
             set(valueOf(),keys,0,value);
+            change(keys);
         }
     }
 
