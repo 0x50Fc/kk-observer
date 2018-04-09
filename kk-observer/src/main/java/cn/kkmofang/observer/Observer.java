@@ -230,6 +230,8 @@ public class Observer implements IObserver {
 
                 KeyListener<T> keyListener = new KeyListener<>(listener,weakObject,priority,false);
 
+                keyListener.func = func;
+
                 for(String[] keys : ctx.evaluateKeys(evaluateCode)) {
                     _keyObserver.add(keys,0,keyListener);
                 }
