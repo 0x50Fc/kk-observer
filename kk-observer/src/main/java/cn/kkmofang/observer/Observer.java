@@ -181,8 +181,10 @@ public class Observer implements IObserver {
         for(KeyListener<?> cb : vs) {
             KeyListener<Object> v = (KeyListener<Object>) cb;
             if(cb.func != null && ctx != null) {
-                Object vv = ctx.execEvaluate(cb.func,this);
-                v.listener.onChanged(this,keys,vv,v.weakObject());
+                Object vv = ctx.execEvaluate(cb.func, this);
+                v.listener.onChanged(this, keys, vv, v.weakObject());
+            } else if(cb.keys != null) {
+                v.listener.onChanged(this, keys,get(cb.keys), v.weakObject());
             } else {
                 v.listener.onChanged(this, keys,get(keys), v.weakObject());
             }
@@ -198,6 +200,10 @@ public class Observer implements IObserver {
 
         if(keys == null) {
             keys = new String[]{};
+        }
+
+        if(!children) {
+            keyListener.keys = keys;
         }
 
         _keyObserver.add(keys,0,keyListener);
@@ -285,6 +291,7 @@ public class Observer implements IObserver {
         public final int priority;
         public final boolean children;
         public Object func;
+        public String[] keys;
 
         private final WeakReference<T> _weakObject;
 
