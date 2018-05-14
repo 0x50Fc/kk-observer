@@ -34,7 +34,7 @@ public class Observer implements IObserver {
 
 
     public Observer(IObserverContext context) {
-        _context = new WeakReference<IObserverContext>(context);
+        _context = new WeakReference<>(context);
     }
 
     public java.lang.Object valueOf() {
