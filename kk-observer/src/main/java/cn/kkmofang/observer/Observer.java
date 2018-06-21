@@ -172,7 +172,7 @@ public class Observer implements IObserver {
         Collections.sort(vs, new Comparator<KeyListener<?>>() {
             @Override
             public int compare(KeyListener<?> o1, KeyListener<?> o2) {
-                return o1.priority - o2.priority;
+                return Integer.valueOf(o1.priority).compareTo(Integer.valueOf(o2.priority));
             }
         });
 
